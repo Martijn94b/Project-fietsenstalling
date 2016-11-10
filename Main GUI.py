@@ -39,22 +39,34 @@ def ophalen():
     totallist= [fietsnummer1,voornaam1,achternaam1,wachtwoord1]
     verify = random.randrange(0,9999)
     with open('fietsen.csv', 'r+') as file:
-        print("homo3")
         reader = csv.reader(file, delimiter=';')
         for row in reader:
-            print("fakig homo")
             if totallist == row[0:4]:
                 with open('register.csv', 'r+') as file2:
                     reader = csv.reader(file2, delimiter=';')
                     for line in reader:
                         if totallist == line[0:4]:
                             test = 'Uw fiets staat klaar om opgehaald te worden. \nUw authenticatie code is:' +str(verify)+'\nWas u dit niet? Stuur dan een e-mail naar klantenservice@ns.nl\nWij hopen dat u van onze dienst heeft genoten en hopelijk tot ziens!'
-                            print("homo")
                             init("atwfgt129b3q3ai4hh3nnmu23b2ebm")
-                            print("homo1")
                             Client("uqjs6boje6bp7okwnre9ndb7s2gwgs").send_message(test, title="NS Stalling")
-                            print("homo2")
     return test, verify
+
+def inloggen():
+    global voornaam
+    global wachtwoord
+    global achternaam
+    global fietsnummer
+    global v
+    voornaam1 = voornaam.get()
+    achternaam1 = achternaam.get()
+    wachtwoord1 = wachtwoord.get()
+    totallist = [fietsnummer,voornaam1,achternaam1,wachtwoord1]
+    with open('register.csv','r') as file2:
+        reader2 = csv.reader(file2, delimiter=';')
+        for row in reader2:
+            if totallist == row[0:4]:
+                with open('fietsen.csv', 'r+') as file:
+                    reader = csv.reader(file, delimiter=';')
 
 def registercontrole():
     global voornaam
@@ -70,20 +82,14 @@ def registercontrole():
     with open('register.csv','r') as file2:
         reader2 = csv.reader(file2, delimiter=';')
         for row in reader2:
-            print(row[0:4])
-            print(totallist)
             if totallist == row[0:4]:
-                #fiets stallen
-                print("kanker1")
                 with open('fietsen.csv', 'r+') as file:
-                    print('kanker')
                     reader = csv.reader(file, delimiter=';')
                     for row in reader:
                         if str(fietsnummer) == row[0]:
                             sys.exit("De fiets met dit codenummer is al gestald")
                     total=(str(fietsnummer)+";"+voornaam1+";"+achternaam1+";"+wachtwoord1+";"+tijd+"\n")
                     file.writelines(total)
-                v.set("Uw fiets is nu gestald")
 
 def verification():
     global test
@@ -143,8 +149,6 @@ def fietsStallenWindow():
     root4.mainloop()
 
 
-
-#---Geef staltijd weer/priveinfo
 def infoprive():
     fietsnummer=str(input("Wat is uw fietsnummer: "))
     wachtwoord=str(input("Voer uw PIN-code in: "))
