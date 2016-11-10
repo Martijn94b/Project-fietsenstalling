@@ -12,20 +12,17 @@ def registreer():
     achternaam=input("Voer uw achternaam in: ")
     fietsnummer=str(random.randrange(0,9999999))
     wachtwoord=str(input("Vul een nieuwe PIN-Code in: "))
-    stalling=str(0)
     with open('register.csv', 'r+') as file:
-     reader = csv.reader(file, delimiter=';')
-     for row in reader:
-          while fietsnummer == row[0]:
-              fietsnummer=str(random.randrange(0,9999999))
-     total=str(fietsnummer+";"+naam+";"+achternaam+";"+wachtwoord+";"+stalling+'\n')
-     file.writelines(total)
-
+        reader = csv.reader(file, delimiter=';')
+        for row in reader:
+            while fietsnummer == row[0]:
+                fietsnummer=str(random.randrange(0,9999999))
+        total=str(fietsnummer+";"+naam+";"+achternaam+";"+wachtwoord+'\n')
+        file.writelines(total)
     print ('-uw fietsnummer is '+fietsnummer)
 
-
 #---Stallen met eerst controle in register
-def registercontrole():
+def registerControle():
     naam=input("Voer uw naam in: ")
     achternaam=input("Voer uw achternaam in: ")
     fietsnummer=(input("Voer uw fietsnummer in: "))
@@ -48,18 +45,18 @@ def registercontrole():
         sys.exit('fiets is niet geregistreerd')
 
 #---Informatie opvragen
-def infoalgemeen():
+def infoAlgemeen():
     bezet=0
     with open ('fietsen.csv','r') as file:
         for line in file:
             bezet+=1
         vrijeplekken= 1000- bezet
-
     tijd=time.strftime("%X ")
     print('\n'+'De fietsenstalling is van 9 uur tot 23 uur geopend.' )
     print('De tijd is nu '+tijd)
     print('er zijn nog '+str(vrijeplekken)+' plekken vrij.')
     print('het stallen kost 50 cent per uur.')
+
 #---Geef staltijd weer/priveinfo
 def infoprive():
     fietsnummer=str(input("Wat is uw fietsnummer: "))
@@ -103,14 +100,8 @@ def ophalen():
 
                             init("atwfgt129b3q3ai4hh3nnmu23b2ebm")
                             Client("uqjs6boje6bp7okwnre9ndb7s2gwgs").send_message(test, title="NS Stalling")
-
-
-
-
-
-                print ("Uw fiets is nu opgehaald")
-            else:
-                print('kon fiets niet ophalen')
+                            sys.exit("Uw fiets is nu opgehaald")
+        sys.exit('kon fiets niet ophalen')
 
 #---Keuzemenu
 keuze =0
@@ -127,17 +118,15 @@ while keuze not in keuzelist:
         keuze=int(input("Maak een keuze uit de getallen 1-6: "))
     except:
         print('Gebruik GETALLEN ')
-
     if keuze == 1:
         registreer()
     elif keuze ==2:
-        registercontrole()
+        registerControle()
     elif keuze ==3:
-        infoalgemeen()
+        infoAlgemeen()
     elif keuze == 4:
         infoprive()
     elif keuze == 5:
         ophalen()
     elif keuze == 6:
         sys.exit('Tot ziens!')
-
