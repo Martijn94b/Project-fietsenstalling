@@ -2,6 +2,7 @@
 
 Handleiding gebruik van de applicatie:
 Om de applicatie te starten voer main_applicatie uit.
+Zorg dat fietsen.csv en register.csv in dezelfde map staan als de applicatie.
 Zodra de applicatie start opent een scherm met hierop 5 knoppen:
 - Registreren
 - Fiets stallen
@@ -12,14 +13,32 @@ Zodra de applicatie start opent een scherm met hierop 5 knoppen:
 # Beschrijving functie knoppen:
 Algemeen:
 Het indrukken van de Sluit venster knop sluit het huidige venster.
+Submit: Ingevulde gegevens worden verwerkt.
 
-Fiets stallen:
-Er opent een nieuw venster met hierin 3 invoer velden, voornaam, achternaam en wachtwoord.
-Daaronder staan 2 knoppen: Submit en Sluit venster.
+#Registreren:
+Er opent een nieuw venster met hierin 3 invoer velden:
+- Voornaam
+- Achternaam
+- Wachtwoord.
+Daaronder staan 2 knoppen: 
+- Submit 
+- Sluit venster.
 Als alle invoer velden ingevuld zijn krijgt de gebruiker  een fietsnummer bij het indrukken van de Submit knop.
 
-Fiets ophalen:
-
+#Fiets ophalen:
+Er opent een nieuw venster met hierin 5 invoer velden:
+- Voornaam
+- Achternaam
+- Wachtwoord
+- Fietsnummer
+- Verificatiecode
+Er zijn 3 knoppen:
+- Stuur verificatiecode
+- Verify
+- Sluit venster
+Als de eerste vier velden zijn ingevuld moet de gebruiker op de knop Stuur verificatiecode drukken.
+Hierna krijg de gebruiker op zijn/haar telefoon een bericht met een verificatiecode.
+Als de verificatiecode is ingevuld drukt u op de Verify knop en krijgt u een melding.
 
 Algemene informatie opvragen:
 
