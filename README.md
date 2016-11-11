@@ -11,7 +11,7 @@ Zodra de applicatie start opent een scherm met hierop 5 knoppen:
 - Privé informatie opvragen
 
 # Beschrijving functie knoppen:
-Algemeen:
+#Algemeen:
 Het indrukken van de Sluit venster knop sluit het huidige venster.
 Submit: Ingevulde gegevens worden verwerkt.
 
@@ -20,6 +20,7 @@ Er opent een nieuw venster met hierin 3 invoer velden:
 - Voornaam
 - Achternaam
 - Wachtwoord.
+
 Daaronder staan 2 knoppen: 
 - Submit 
 - Sluit venster.
@@ -32,6 +33,7 @@ Er opent een nieuw venster met hierin 5 invoer velden:
 - Wachtwoord
 - Fietsnummer
 - Verificatiecode
+
 Er zijn 3 knoppen:
 - Stuur verificatiecode
 - Verify
@@ -40,7 +42,13 @@ Als de eerste vier velden zijn ingevuld moet de gebruiker op de knop Stuur verif
 Hierna krijg de gebruiker op zijn/haar telefoon een bericht met een verificatiecode.
 Als de verificatiecode is ingevuld drukt u op de Verify knop en krijgt u een melding.
 
-Algemene informatie opvragen:
+#Algemene informatie opvragen:
+Bij het openen van algemene informatie zal u de volgende gegevens zien:
+Het aantal vrije plekken
+openingstijden
+stallingskosten
 
+Er is 1 knop:
+Sluit venster
 
-Privé informatie opvragen:
+#Privé informatie opvragen:
