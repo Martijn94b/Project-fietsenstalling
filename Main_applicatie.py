@@ -52,7 +52,6 @@ def ophalen():
                     reader = csv.reader(file2, delimiter=';')
                     for line in reader:
                         if totallist == line[0:4]:
-                            print("homo")
                             test = 'Uw fiets staat klaar om opgehaald te worden. \nUw authenticatie code is:' +str(verify)+'\nWas u dit niet? Stuur dan een e-mail naar klantenservice@ns.nl\nWij hopen dat u van onze dienst heeft genoten en hopelijk tot ziens!'
                             init("atwfgt129b3q3ai4hh3nnmu23b2ebm")
                             Client("uqjs6boje6bp7okwnre9ndb7s2gwgs").send_message(test, title="NS Stalling")
