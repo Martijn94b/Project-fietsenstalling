@@ -3,9 +3,8 @@
 Handleiding gebruik van de applicatie:
 Om de applicatie te starten voer main_applicatie uit.
 Zorg dat fietsen.csv en register.csv in dezelfde map staan als de applicatie.
-Zodra de applicatie start opent een scherm met hierop 5 knoppen:
+Zodra de applicatie start opent een scherm met hierop 4 knoppen:
 - Registreren
-- Fiets stallen
 - Fiets ophalen 
 - Algemene informatie opvragen
 - Privé informatie opvragen
