@@ -19,11 +19,12 @@ Submit: Ingevulde gegevens worden verwerkt.
 Er opent een nieuw venster met hierin 3 invoer velden:
 - Voornaam
 - Achternaam
-- Wachtwoord.
+- Wachtwoord
 
 Daaronder staan 2 knoppen: 
 - Submit 
-- Sluit venster.
+- Sluit venster
+
 Als alle invoer velden ingevuld zijn krijgt de gebruiker  een fietsnummer bij het indrukken van de Submit knop.
 
 #Fiets ophalen:
@@ -44,11 +45,17 @@ Als de verificatiecode is ingevuld drukt u op de Verify knop en krijgt u een mel
 
 #Algemene informatie opvragen:
 Bij het openen van algemene informatie zal u de volgende gegevens zien:
-Het aantal vrije plekken
-openingstijden
-stallingskosten
+- Het aantal vrije plekken
+- De openingstijden
+- De stallingskosten per uur
 
 Er is 1 knop:
-Sluit venster
+- Sluit venster
 
 #Privé informatie opvragen:
+De gebruiker moet inloggen door de velden Fietsnummer en Wachtwoord in te vullen. 
+Als deze velden ingevuld zijn drukt u op Login.
+
+Na het inloggen verschijnen de volgende gegevens:
+- Hoelang de fiets al in de stalling staat
+- De prijs die de stalling (tot nu toe) kost
