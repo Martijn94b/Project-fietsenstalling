@@ -11,10 +11,12 @@ achternaam= str("")
 wachtwoord = str("")
 vrijePlekken = 0
 fietsnummer= 0
-v = ""
 verify2 = str("")
 test = ""
 verify = ""
+verschil2 = 0
+prijs = 0
+
 def infoalgemeen():
     bezet=0
     global vrijePlekken
@@ -23,6 +25,7 @@ def infoalgemeen():
             bezet += 1
         vrijePlekken = 1001 - bezet
     return vrijePlekken
+
 
 def ophalen():
     global voornaam
@@ -39,44 +42,62 @@ def ophalen():
     totallist= [fietsnummer1,voornaam1,achternaam1,wachtwoord1]
     verify = random.randrange(0,9999)
     with open('fietsen.csv', 'r+') as file:
-        print("homo3")
         reader = csv.reader(file, delimiter=';')
         for row in reader:
-            print("fakig homo")
             if totallist == row[0:4]:
                 with open('register.csv', 'r+') as file2:
                     reader = csv.reader(file2, delimiter=';')
                     for line in reader:
                         if totallist == line[0:4]:
                             test = 'Uw fiets staat klaar om opgehaald te worden. \nUw authenticatie code is:' +str(verify)+'\nWas u dit niet? Stuur dan een e-mail naar klantenservice@ns.nl\nWij hopen dat u van onze dienst heeft genoten en hopelijk tot ziens!'
-                            print("homo")
                             init("atwfgt129b3q3ai4hh3nnmu23b2ebm")
-                            print("homo1")
                             Client("uqjs6boje6bp7okwnre9ndb7s2gwgs").send_message(test, title="NS Stalling")
-                            print("homo2")
     return test, verify
 
-def registercontrole():
-    naam=input("Voer uw naam in: ")
-    achternaam=input("Voer uw achternaam in: ")
-    fietsnummer=(input("Voer uw fietsnummer in: "))
-    wachtwoord=str(input("Voer uw PIN-Code in: "))
-    totallist= [fietsnummer,naam,achternaam,wachtwoord]
-    tijd=time.strftime("%Y-%m-%d %H:%M:%S")
+
+def inloggen():
+    global voornaam
+    global wachtwoord
+    global achternaam
+    global fietsnummer
+    global v
+    voornaam1 = voornaam.get()
+    achternaam1 = achternaam.get()
+    wachtwoord1 = wachtwoord.get()
+    totallist = [fietsnummer,voornaam1,achternaam1,wachtwoord1]
     with open('register.csv','r') as file2:
         reader2 = csv.reader(file2, delimiter=';')
         for row in reader2:
             if totallist == row[0:4]:
-                #fiets stallen
+                with open('fietsen.csv', 'r+') as file:
+                    reader = csv.reader(file, delimiter=';')
+
+
+def registercontrole():
+    global voornaam
+    global wachtwoord
+    global achternaam
+    global fietsnummer
+    global v
+
+    voornaam1 = voornaam.get()
+    achternaam1 = achternaam.get()
+    wachtwoord1 = wachtwoord.get()
+    totallist = [fietsnummer,voornaam1,achternaam1,wachtwoord1]
+    tijd=time.strftime("%Y-%m-%d %H:%M:%S")
+
+    with open('register.csv','r') as file2:
+        reader2 = csv.reader(file2, delimiter=';')
+        for row in reader2:
+            if totallist == row[0:4]:
                 with open('fietsen.csv', 'r+') as file:
                     reader = csv.reader(file, delimiter=';')
                     for row in reader:
                         if str(fietsnummer) == row[0]:
                             sys.exit("De fiets met dit codenummer is al gestald")
-                    total=(str(fietsnummer)+";"+naam+";"+achternaam+";"+wachtwoord+";"+tijd+"\n")
+                    total=(str(fietsnummer)+";"+voornaam1+";"+achternaam1+";"+wachtwoord1+";"+tijd+"\n")
                     file.writelines(total)
-                sys.exit("Uw fiets is nu gestald")
-        sys.exit('fiets is niet geregistreerd')
+
 
 def verification():
     global test
@@ -91,7 +112,7 @@ def verification():
         v.set('kon fiets niet ophalen')
 
 
-def fietsStallenWindow():
+def registreerWindow():
     root4 = Toplevel()
 
     global voornaam
@@ -102,7 +123,7 @@ def fietsStallenWindow():
     root4.geometry("500x500")
     root4.configure(background="yellow")
 
-    titelLabel1 = Label(root4, text="Fiets stallen, vul de volgende gegevens in", bg="yellow")
+    titelLabel1 = Label(root4, text="Registreren, vul de volgende gegevens in", bg="yellow")
     titelLabel1.grid(columnspan=4)
 
     voorNaamLabel = Label(root4, text="Voornaam", bg="yellow")
@@ -135,38 +156,21 @@ def fietsStallenWindow():
 
     root4.mainloop()
 
-#---Stallen met eerst controle in register
-def registercontrole():
-    naam=input("Voer uw naam in: ")
-    achternaam=input("Voer uw achternaam in: ")
-    fietsnummer=(input("Voer uw fietsnummer in: "))
-    wachtwoord=str(input("Voer uw PIN-Code in: "))
-    totallist= [fietsnummer,naam,achternaam,wachtwoord]
-    tijd=time.strftime("%Y-%m-%d %H:%M:%S")
-    with open('register.csv','r') as file2:
-        reader2 = csv.reader(file2, delimiter=';')
-        for row in reader2:
-            if totallist == row[0:4]:
-                #fiets stallen
-                with open('fietsen.csv', 'r+') as file:
-                    reader = csv.reader(file, delimiter=';')
-                    for row in reader:
-                        if str(fietsnummer) == row[0]:
-                            sys.exit("De fiets met dit codenummer is al gestald")
-                    total=(str(fietsnummer)+";"+naam+";"+achternaam+";"+wachtwoord+";"+tijd+"\n")
-                    file.writelines(total)
-                sys.exit("Uw fiets is nu gestald")
-        sys.exit('fiets is niet geregistreerd')
 
-#---Geef staltijd weer/priveinfo
 def infoprive():
-    fietsnummer=str(input("Wat is uw fietsnummer: "))
-    wachtwoord=str(input("Voer uw PIN-code in: "))
+    global fietsnummer
+    global wachtwoord
+    global verschil2
+    global prijs
+    global h
+    global g
+    wachtwoord1 = wachtwoord.get()
+    fietsnummer1 = fietsnummer.get()
     nu=time.strftime('%Y-%m-%d %H:%M:%S')
     with open ("fietsen.csv",'r') as file:
         reader = csv.reader(file, delimiter=';')
         for row in reader:
-            if fietsnummer == row[0] and wachtwoord == row [3]:
+            if fietsnummer1 == row[0] and wachtwoord1 == row [3]:
                 tijd=row[4]
                 fmt = '%Y-%m-%d %H:%M:%S'
                 d1 = datetime.strptime(str(tijd), fmt)
@@ -175,10 +179,10 @@ def infoprive():
                 verschil2=verschil/60
                 verschil2=round(verschil2)
                 prijs=round((verschil2*0.008333333),2)
-                print ("Deze fiets staat "+str(verschil2)+" minuten in de stalling")
-                print ("De prijs van deze staltijd is "+str(prijs)+" euro.")
-                sys.exit()
-        sys.exit("Deze gegevens zijn incorrect")
+                h.set(("Deze fiets staat "+str(verschil2)+" minuten in de stalling"))
+                g.set(("De prijs van deze staltijd is "+str(prijs)+" euro."))
+    return verschil2, prijs
+
 
 def registreer():
     global voornaam
@@ -197,10 +201,10 @@ def registreer():
               fietsnummer=str(random.randrange(0,9999999))
      total=str(fietsnummer+";"+voornaam1+";"+achternaam1+";"+wachtwoord1+'\n')
      file.writelines(total)
-
-    print ('-uw fietsnummer is '+fietsnummer)
     v.set("Uw fietsnummer is: "+str(fietsnummer))
+    registercontrole()
     return fietsnummer
+
 
 def fietsOphalenWindow():
     root1 = Toplevel()
@@ -214,6 +218,9 @@ def fietsOphalenWindow():
     root1.geometry("500x500")
     root1.configure(background="yellow")
     try:
+        quitButton = Button(root1, text="Sluit venster", command=root1.destroy)
+        quitButton.grid(row=6, column=3, sticky=W)
+
         titelLabel1 = Label(root1, text="Fiets ophalen, vul de volgende gegevens in", bg="yellow")
         titelLabel1.grid(columnspan=4)
 
@@ -252,6 +259,8 @@ def fietsOphalenWindow():
 
         verification()
 
+
+
         v = StringVar()
         opgehaaldLabel = Label(root1, textvariable=v, bg="yellow")
         opgehaaldLabel.grid(row=6, columnspan=2)
@@ -259,6 +268,7 @@ def fietsOphalenWindow():
         warningLabel = Label(root1, text="Gebruik alleen letters bij uw voornaam en achternaam")
         warningLabel.grid(row=7, columnspan=3)
     root1.mainloop()
+
 
 def algemeneInfoWindow():
     root2 = Toplevel()
@@ -278,24 +288,55 @@ def algemeneInfoWindow():
     stalKosten = Label(root2, text="Het stallen kost €0.50 per uur", bg="yellow")
     stalKosten.place(relx=0.2, rely=0.55, anchor=W)
 
+    quitButton = Button(root2, text="Sluit venster", command=root2.destroy)
+    quitButton.grid(row=6, column=3, sticky=W)
+
     root2.mainloop()
+
 
 def priveInfoWindow():
     root3 = Toplevel()
 
+    global wachtwoord
+    global fietsnummer
+    global h
+    global g
     root3.geometry("500x500")
     root3.configure(background="yellow")
 
-    infoLabel = Label(root3, text="Log in om prive informatie te kunnen inzien.")
-    infoLabel.place()
-    wwLabel = Label(root3, text="wachtwoord")
-    wwLabel.place(relx=0.2, rely=0.5, anchor=E)
-    wachtwoord = Entry(root3)
-    wachtwoord.place(relx=0.25, rely=0.5, anchor=W)
+    infoLabel = Label(root3, text="Log in om prive informatie te kunnen inzien.", bg="yellow")
+    infoLabel.grid(columnspan=4)
 
+    fietsnummerLabel = Label(root3, text="Fietsnummer", bg="yellow")
+    fietsnummerLabel.grid(row=1)
+
+    fietsnummer = Entry(root3)
+    fietsnummer.grid(row=1, column=1)
+
+    wachtwoordLabel = Label(root3, text="Wachtwoord", bg="yellow")
+    wachtwoordLabel.grid(row=2)
+
+    wachtwoord = Entry(root3)
+    wachtwoord.grid(row=2, column=1)
+
+    loginButton = Button(root3, text="Login", command=infoprive)
+    loginButton.grid(row=3, columnspan=2)
+
+    tijdLabel = Label(root3, textvariable=h, bg="yellow")
+    tijdLabel.grid(row=4, columnspan=2)
+
+    prijsLabel = Label(root3, textvariable=g, bg="yellow")
+    prijsLabel.grid(row=5, columnspan=2)
+
+    wachtwoordLabel = Label(root3, text="Wachtwoord", bg="yellow")
+    wachtwoordLabel.grid(row=2)
     root3.mainloop()
 
 root = Tk()
+
+h = StringVar()
+v = StringVar()
+g = StringVar()
 
 root.geometry("500x500")
 root.configure(background="yellow")
@@ -303,7 +344,7 @@ titelLabel = Label(root, text='yo')
 titelLabel = Label(root, text='Fietsenstalling NS, maak uw keuze.', bg='yellow', font=20)
 titelLabel.place(relx=0.5, rely=0.1, anchor=N)
 
-stallenButton = Button(root, text='Fiets stallen.', command=fietsStallenWindow, bg='light blue', font=15)
+stallenButton = Button(root, text='Registreren.', command=registreerWindow, bg='light blue', font=15)
 stallenButton.place(relx=0.5, rely=0.35, anchor=CENTER)
 
 ophalenButton = Button(root, text='Fiets ophalen.', command=fietsOphalenWindow, bg='light blue', font=15)
