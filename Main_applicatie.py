@@ -1,3 +1,4 @@
+"""import van benodigde modules"""
 from tkinter import *
 import random
 import time
@@ -18,16 +19,18 @@ verschil2 = 0
 prijs = 0
 
 def infoalgemeen():
+    """Informatie voor algemeneInfoWindow()"""
     bezet=0
     global vrijePlekken
     with open ('fietsen.csv','r') as file:
         for line in file:
             bezet += 1
-        vrijePlekken = 1001 - bezet
+        vrijePlekken = 1000 - bezet
     return vrijePlekken
 
 
 def ophalen():
+    """Fiets ophalen en verificatiecode opsturen naar telefoon"""
     global voornaam
     global wachtwoord
     global achternaam
@@ -57,6 +60,7 @@ def ophalen():
 
 
 def inloggen():
+    """inloggen"""
     global voornaam
     global wachtwoord
     global achternaam
@@ -75,6 +79,7 @@ def inloggen():
 
 
 def registercontrole():
+    """Controle of fietsnummer niet al in gebruik is"""
     global voornaam
     global wachtwoord
     global achternaam
@@ -101,6 +106,7 @@ def registercontrole():
 
 
 def verification():
+    """Checked of de opgestuurde verificatie code juist is ingevuld"""
     global test
     global verify3
     global v
@@ -114,6 +120,7 @@ def verification():
 
 
 def registreerWindow():
+    """Registreren gebruiker en gelijk stallen van de fiets"""
     root4 = Toplevel()
 
     global voornaam
@@ -159,6 +166,7 @@ def registreerWindow():
 
 
 def infoprive():
+    """inloggen en laten zien van privé gegevens"""
     global fietsnummer
     global wachtwoord
     global verschil2
