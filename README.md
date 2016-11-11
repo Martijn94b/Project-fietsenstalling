@@ -38,6 +38,7 @@ Er zijn 3 knoppen:
 - Stuur verificatiecode
 - Verify
 - Sluit venster
+
 Als de eerste vier velden zijn ingevuld moet de gebruiker op de knop Stuur verificatiecode drukken.
 Hierna krijg de gebruiker op zijn/haar telefoon een bericht met een verificatiecode.
 Als de verificatiecode is ingevuld drukt u op de Verify knop en krijgt u een melding.
