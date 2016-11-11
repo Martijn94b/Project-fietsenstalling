@@ -11,9 +11,9 @@ achternaam= str("")
 wachtwoord = str("")
 vrijePlekken = 0
 fietsnummer= 0
-verify2 = str("")
+verify3 = str("")
 test = ""
-verify = ""
+verify = 0
 verschil2 = 0
 prijs = 0
 
@@ -32,7 +32,7 @@ def ophalen():
     global wachtwoord
     global achternaam
     global fietsnummer
-    global verify2
+    global verify3
     global test
     global verify
     voornaam1 = voornaam.get()
@@ -40,7 +40,7 @@ def ophalen():
     wachtwoord1 = wachtwoord.get()
     fietsnummer1 = fietsnummer.get()
     totallist= [fietsnummer1,voornaam1,achternaam1,wachtwoord1]
-    verify = random.randrange(0,9999)
+    verify = random.randrange(1000,9999)
     with open('fietsen.csv', 'r+') as file:
         reader = csv.reader(file, delimiter=';')
         for row in reader:
@@ -49,6 +49,7 @@ def ophalen():
                     reader = csv.reader(file2, delimiter=';')
                     for line in reader:
                         if totallist == line[0:4]:
+                            print("homo")
                             test = 'Uw fiets staat klaar om opgehaald te worden. \nUw authenticatie code is:' +str(verify)+'\nWas u dit niet? Stuur dan een e-mail naar klantenservice@ns.nl\nWij hopen dat u van onze dienst heeft genoten en hopelijk tot ziens!'
                             init("atwfgt129b3q3ai4hh3nnmu23b2ebm")
                             Client("uqjs6boje6bp7okwnre9ndb7s2gwgs").send_message(test, title="NS Stalling")
@@ -101,15 +102,15 @@ def registercontrole():
 
 def verification():
     global test
-    global verify2
+    global verify3
     global v
     global verify
 
-    verify2 = verify2.get()
+    verify2 = int(verify3.get())
     if verify == verify2:
-        v.set("Uw fiets is opgehaald!")
+        v.set("Uw fiets kan nu opgehaald worden!")
     else:
-        v.set('kon fiets niet ophalen')
+        v.set('Er is iets misgegaan, probeer opnieuw.')
 
 
 def registreerWindow():
@@ -214,59 +215,56 @@ def fietsOphalenWindow():
     global achternaam
     global fietsnummer
     global v
+    global verify3
 
     root1.geometry("500x500")
     root1.configure(background="yellow")
-    try:
-        quitButton = Button(root1, text="Sluit venster", command=root1.destroy)
-        quitButton.grid(row=6, column=3, sticky=W)
 
-        titelLabel1 = Label(root1, text="Fiets ophalen, vul de volgende gegevens in", bg="yellow")
-        titelLabel1.grid(columnspan=4)
+    quitButton = Button(root1, text="Sluit venster", command=root1.destroy)
+    quitButton.grid(row=6, column=3, sticky=W)
 
-        voorNaamLabel = Label(root1, text="Voornaam", bg="yellow")
-        voorNaamLabel.grid(row=1, sticky=E)
+    titelLabel1 = Label(root1, text="Fiets ophalen, vul de volgende gegevens in", bg="yellow")
+    titelLabel1.grid(row=0, columnspan=4)
 
-        voornaam = Entry(root1)
-        voornaam.grid(row=1, column=1)
+    voorNaamLabel = Label(root1, text="Voornaam", bg="yellow")
+    voorNaamLabel.grid(row=1, sticky=E)
 
-        achterNaamLabel = Label(root1, text="Achternaam", bg="yellow")
-        achterNaamLabel.grid(row=2, sticky=E)
+    voornaam = Entry(root1)
+    voornaam.grid(row=1, column=1)
 
-        achternaam = Entry(root1)
-        achternaam.grid(row=2, column=1)
+    achterNaamLabel = Label(root1, text="Achternaam", bg="yellow")
+    achterNaamLabel.grid(row=2, sticky=E)
 
-        wachtwoordLabel = Label(root1, text="Wachtwoord", bg="yellow")
-        wachtwoordLabel.grid(row=3, sticky=E)
+    achternaam = Entry(root1)
+    achternaam.grid(row=2, column=1)
 
-        wachtwoord = Entry(root1)
-        wachtwoord.grid(row=3, column=1)
+    wachtwoordLabel = Label(root1, text="Wachtwoord", bg="yellow")
+    wachtwoordLabel.grid(row=3, sticky=E)
 
-        fietsnummerLabel = Label(root1, text="Fietsnummer", bg="yellow")
-        fietsnummerLabel.grid(row=4, sticky=E)
+    wachtwoord = Entry(root1)
+    wachtwoord.grid(row=3, column=1)
 
-        fietsnummer = Entry(root1)
-        fietsnummer.grid(row=4, column=1)
+    fietsnummerLabel = Label(root1, text="Fietsnummer", bg="yellow")
+    fietsnummerLabel.grid(row=4, sticky=E)
 
-        submitButton = Button(root1, text='Stuur verificatiecode', command=ophalen)
-        submitButton.grid(row=5, columnspan=2)
+    fietsnummer = Entry(root1)
+    fietsnummer.grid(row=4, column=1)
 
-        verifyCodeLabel = Label(root1, text="Verificatiecode", bg="yellow")
-        verifyCodeLabel.grid(row=6, sticky=E)
+    submitButton = Button(root1, text='Stuur verificatiecode', command=ophalen)
+    submitButton.grid(row=5, columnspan=2)
 
-        verify2 = Entry(root1)
-        verify2.grid(row=6, column=1)
+    verifyCodeLabel = Label(root1, text="Verificatiecode", bg="yellow")
+    verifyCodeLabel.grid(row=6, sticky=E)
 
-        verification()
+    verify3 = Entry(root1)
+    verify3.grid(row=6, column=1)
 
+    verifyButton = Button(root1, text="Verify",command=verification)
+    verifyButton.grid(row=7, columnspan=2)
 
+    opgehaaldLabel = Label(root1, textvariable=v, bg="yellow")
+    opgehaaldLabel.grid(row=8, columnspan=2)
 
-        v = StringVar()
-        opgehaaldLabel = Label(root1, textvariable=v, bg="yellow")
-        opgehaaldLabel.grid(row=6, columnspan=2)
-    except:
-        warningLabel = Label(root1, text="Gebruik alleen letters bij uw voornaam en achternaam")
-        warningLabel.grid(row=7, columnspan=3)
     root1.mainloop()
 
 
