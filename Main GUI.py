@@ -328,6 +328,9 @@ def priveInfoWindow():
 
     wachtwoordLabel = Label(root3, text="Wachtwoord", bg="yellow")
     wachtwoordLabel.grid(row=2)
+
+    quitButton = Button(root3, text="Sluit venster", command=root3.destroy)
+    quitButton.grid(row=3, column=3, sticky=W)
     root3.mainloop()
 
 root = Tk()
